@@ -1,0 +1,10 @@
+
+
+
+<input class="form-control" type="text"  placeholder="enter color " [(ngModel)]="color">
+<h1> {{title}}</h1>
+<input class="btn btn-secondary" type="submit" value="save" (click)="save()">
+
+
+
+<p [style.backgroundColor]="color"> welcome to {{title}}</p>

@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">{{ isEditMode ? 'Modifier la suggestion' : 'Nouvelle suggestion' }}</h2>
+      <form [formGroup]="suggestionForm" (ngSubmit)="onSubmit()">
+        
+        <div class="mb-3">
+              <label for="title" class="form-label">Titre <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="title" 
+                formControlName="title"
+                [class.is-invalid]="title?.invalid && (title?.dirty || title?.touched)"
+                [class.is-valid]="title?.valid && (title?.dirty || title?.touched)">
+              
+              <div class="invalid-feedback" *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+                <div *ngIf="title?.errors?.['required']">Le titre est obligatoire.</div>
+                <div *ngIf="title?.errors?.['minlength']">Le titre doit contenir au minimum 5 caractères.</div>
+                <div *ngIf="title?.errors?.['pattern']">Le titre doit commencer par une majuscule et ne contenir que des lettres.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+              <textarea 
+                class="form-control" 
+                id="description" 
+                rows="4" 
+                formControlName="description"
+                [class.is-invalid]="description?.invalid && (description?.dirty || description?.touched)"
+                [class.is-valid]="description?.valid && (description?.dirty || description?.touched)"></textarea>
+              
+              <div class="invalid-feedback" *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                <div *ngIf="description?.errors?.['required']">La description est obligatoire.</div>
+                <div *ngIf="description?.errors?.['minlength']">La description doit contenir au minimum 30 caractères.</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="category" class="form-label">Catégorie <span class="text-danger">*</span></label>
+              <select 
+                class="form-select" 
+                id="category" 
+                formControlName="category"
+                [class.is-invalid]="category?.invalid && (category?.dirty || category?.touched)"
+                [class.is-valid]="category?.valid && (category?.dirty || category?.touched)">
+                <option value="">Sélectionnez une catégorie</option>
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+              </select>
+              
+              <div class="invalid-feedback" *ngIf="category?.invalid && (category?.dirty || category?.touched)">
+                <div *ngIf="category?.errors?.['required']">La catégorie est obligatoire.</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="date" class="form-label">Date</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                id="date" 
+                formControlName="date"
+                readonly>
+            </div>
+
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="status" 
+                formControlName="status"
+                readonly>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button 
+                type="submit" 
+                class="btn btn-primary" 
+                [disabled]="suggestionForm.invalid">
+                {{ isEditMode ? 'Modifier' : 'Soumettre' }}
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-secondary" 
+                [routerLink]="['/suggestions']">
+                Annuler
+              </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

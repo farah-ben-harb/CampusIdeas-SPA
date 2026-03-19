@@ -1,0 +1,18 @@
+
+
+
+<table class="table" border="1">
+   <tr>
+     <th>Name</th>
+     <th>Price</th>
+     <th>Quantity</th>
+     <th>actions</th>
+   </tr>
+
+   <tr *ngFor="let p of products, let i=index">
+     <td>{{ p.name }}</td>
+     <td>{{ p.price | currency }}</td>
+     <td>{{ p.quantity }}</td>
+     <td><button class="btn btn-primary" [disabled] ="p.quantity===0"  (click)="buy(p.id)">buy</button></td>
+   </tr>
+</table>

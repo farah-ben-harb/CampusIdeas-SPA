@@ -1,0 +1,57 @@
+<div class="detail-container" *ngIf="suggestion">
+  <div class="detail-header">
+    <button class="btn-back" (click)="goBack()">
+      <span>←</span> Retour à la liste
+    </button>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-status" [ngClass]="{
+      'status-acceptee': suggestion.status === 'acceptee',
+      'status-refusee': suggestion.status === 'refusee',
+      'status-attente': suggestion.status === 'en_attente'
+    }">
+      {{ suggestion.status === 'acceptee' ? 'Acceptée' : suggestion.status === 'refusee' ? 'Refusée' : 'En attente' }}
+    </div>
+
+    <h1 class="detail-title">{{ suggestion.title }}</h1>
+    
+    <div class="detail-meta">
+      <div class="meta-item">
+        <span class="meta-label">Catégorie:</span>
+        <span class="meta-value category-badge">{{ suggestion.category }}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Date:</span>
+        <span class="meta-value">{{ suggestion.date | date:'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Likes:</span>
+        <span class="meta-value likes-count">❤️ {{ suggestion.nbLikes }}</span>
+      </div>
+    </div>
+
+    <div class="detail-description">
+      <h2>Description</h2>
+      <p>{{ suggestion.description }}</p>
+    </div>
+
+    <div class="detail-actions">
+      <button class="btn btn-like" [disabled]="suggestion.status === 'refusee'" (click)="Like()">
+        ❤️ J'aime
+      </button>
+      <button class="btn btn-favorite" [disabled]="suggestion.status === 'refusee'">
+        ⭐ Ajouter aux favoris
+      </button>
+      <button class="btn btn-favorite" [disabled]="suggestion.status === 'refusee'" (click)="updateSuggestion()">
+        ✏️ Modifier
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="error-container" *ngIf="!suggestion">
+  <h2>Suggestion non trouvée</h2>
+  <p>La suggestion avec l'ID {{ suggestionId }} n'existe pas.</p>
+  <button class="btn btn-back" (click)="goBack()">Retour à la liste</button>
+</div>

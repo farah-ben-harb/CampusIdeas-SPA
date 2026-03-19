@@ -1,0 +1,43 @@
+<form [formGroup]="formUsers">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control"  placeholder="Enter email" formControlName="email">
+    <small class="text-danger" *ngIf="f['email'].hasError('required')">Email is required</small>
+    <small class="text-danger" *ngIf="f['email'].hasError('email')">Email is invalid</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+    <small class="text-danger" *ngIf="f['password'].hasError('required')">Password is required</small>
+    <small class="text-danger" *ngIf="f['password'].hasError('minlength')">Password must be at least 6 characters</small>
+    <small class="text-danger" *ngIf="f['password'].hasError('pattern')">Password must contain at least one uppercase letter, one lowercase letter, one number and one special character</small>
+  </div>
+
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Telephone</label>
+    <input type="text" class="form-control" placeholder="Enter telephone" formControlName="tel">
+    <small class="text-danger" *ngIf="f['tel'].hasError('required')">Telephone is required</small>
+    <small class="text-danger" *ngIf="f['tel'].hasError('pattern')">Telephone must be a valid number</small>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Address</label>
+    <input type="text" class="form-control" placeholder="Enter address" formControlName="address">
+    <small class="text-danger" *ngIf="f['address'].hasError('required')">Address is required</small>
+    <small class="text-danger" *ngIf="f['address'].hasError('minlength')">Address must be at least 10 characters</small>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Age</label>
+    <input type="text" class="form-control" placeholder="Enter age" formControlName="age">
+    <small class="text-danger" *ngIf="f['age'].hasError('required')">Age is required</small>
+    <small class="text-danger" *ngIf="f['age'].hasError('min') || f['age'].hasError('max')">Age must be between 18 and 100</small>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="formUsers.invalid"] (click)="submit()">Submit</button>
+</form>

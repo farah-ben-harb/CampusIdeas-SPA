@@ -1,0 +1,22 @@
+<button class="btn btn-success mb-3" [routerLink]="['/suggestions/ajouter']">Ajouter suggestion</button>
+<input type="text" placeholder="Search suggestions" class="form-control mb-3" [(ngModel)]="searchItem">
+<div class="row">
+    <div class="col-md-3" *ngFor="let s of suggestions">
+        <ng-container *ngIf="!searchItem || s.title.toLowerCase().includes(searchItem.toLowerCase())">
+        <div class="card" style="width: 18rem; position: relative;">
+        <button class="btn-delete" (click)="DeleteSuggestion(s.id)" title="Supprimer">&times;</button>
+        <div class="card-body">
+            <h5 class="card-title">Title : {{s.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Category : {{s.category}}</h6>
+            <p class="card-text">Description : {{s.description}}</p>
+            <p class="card-text">Date : {{s.date | date}}</p>
+            <p class="card-text">Status : {{s.status}}</p>
+            <p class="card-text">Number of Likes : {{s.nbLikes}}</p>
+            <button class="btn btn-primary" [hidden]="s.status=='refusee'" (click)="Like(s)">Like</button>
+            <button class="btn btn-primary"  [routerLink]="['/suggestions/detail', s.id]">Detail</button>
+            <button class="btn btn-secondary" [hidden]="s.status=='refusee'" (click)="Ajouter_aux_favoris(s)">Ajouter aux favoris</button>
+        </div>
+        </div>
+        </ng-container>
+    </div>
+</div>  
